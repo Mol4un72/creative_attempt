@@ -1,0 +1,36 @@
+.page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.main{
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    height: 480px;
+    background-color: #263238;
+    border: 1px solid #FFFF;
+    border-radius: 8px;
+    color: #FFFF;
+}
+
+.main h2{
+    margin: 0 auto;
+    font-size: 80px;
+}
+
+.main p{
+    padding-top: 40px;
+    margin: 0 auto;
+    font-size: 40px;
+    width: 600px;
+    text-align: center;
+}
+
+.main img{
+    margin: 0 auto;
+    height: 180px;
+    width: 180px;
+}

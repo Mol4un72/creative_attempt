@@ -1,65 +1,53 @@
-import Image from "next/image";
+import Header from "../components/Header/Header";
+import Button from "../components/Button/Button";
+import Footer from "../components/Footer/Footer";
+import styles from "./page.module.css";
+import Link from "next/link";
+
+const featureSteps = [
+  { src: "/phone_1.png", alt: "Upload your work", label: "Upload" },
+  { src: "/phone_2.png", alt: "Name your artwork", label: "Name" },
+  { src: "/phone_3.png", alt: "Sell your creation", label: "Sell!" },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className={styles.page}>
+      <Header />
+
+      <main className={styles.hero}>
+        <div className={styles.heroContent}>
+          <h1 className={styles.title}>Creative Attempt</h1>
+          <p className={styles.description}>
+            A place to display your creativity. Here you can post your work for
+            other users to buy and collect.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+          <div className={styles.actions}>
+            <Link href="#learnmore"><Button  className={styles.secondaryBtn}>Learn More</Button></Link>
+            <Link href="/gallery"><Button className={styles.primaryBtn}>Gallery</Button></Link>
+          </div>
         </div>
       </main>
+
+      <section className={styles.steps} aria-label="Three simple steps">
+        {featureSteps.map(({ src, alt, label }) => (
+          <article key={label} className={styles.step}>
+            <img id="learnmore" src={src} alt={alt} className={styles.stepImage} />
+            <span className={styles.stepLabel}>{label}</span>
+          </article>
+        ))}
+      </section>
+
+      <section className={styles.donate}>
+        <h2>Like this site?</h2>
+        <p>
+          You can support with a donation and help improve the site.
+        </p>
+        <Button className={styles.primaryBtn}>Donate</Button>
+      </section>
+
+      <Footer />
     </div>
   );
 }

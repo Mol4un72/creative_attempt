@@ -1,0 +1,170 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  background-color: #182230;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 70vh;
+  max-height: 760px;
+  padding: 4rem 1.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+  background-color: #000000;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/main_bg.png') center top / cover no-repeat;
+  filter: blur(10px);
+  transform: scale(1.05);
+  opacity: 0.9;
+  z-index: 0;
+}
+
+.heroContent {
+  max-width: 1200px;
+  width: 100%;
+  margin-left: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  font-size: clamp(32px, 5vw, 104px);
+  font-weight: 800;
+  line-height: 1.02;
+  margin: 0;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow-wrap: normal;
+}
+
+.description {
+  font-size: clamp(32px, 4vw, 64px);
+  color: #ffffff;
+  margin: 1.5rem 0 0;
+  max-width: 1200px;
+  line-height: 1.4;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+.primaryBtn {
+  min-width: 140px;
+}
+
+.secondaryBtn {
+  background-color: transparent;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+}
+
+.steps {
+  margin: 8rem;
+  display: grid;
+  gap: 1.5rem;
+  padding: 0 1.5rem;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  margin: 0;
+}
+
+.stepImage {
+  width: min(260px, 100%);
+  height: auto;
+  border-radius: 24px;
+  object-fit: cover;
+}
+
+.stepLabel {
+  color: #ffffff;
+  font-size: clamp(1.2rem, 2vw, 2rem);
+  font-weight: 600;
+}
+
+.donate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  padding: 2rem 1.5rem;
+  margin: 6rem auto 2rem;
+  max-width: 700px;
+  width: min(100%, 700px);
+  align-self: center;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.donate h2 {
+  margin: 0;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  color: #ffffff;
+}
+
+.donate p {
+  margin: 0;
+  color: #ffffff;
+  max-width: 640px;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    padding: 5rem 3rem 3rem;
+  }
+
+  .steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding: 0 3rem;
+  }
+
+  .donate {
+    margin: 0 3rem 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    padding: 6rem 4rem 4rem;
+  }
+
+  .steps {
+    gap: 2rem;
+  }
+
+  .donate {
+    padding: 3rem 4rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .stepImage {
+    max-width: 220px;
+  }
+
+  .stepLabel {
+    font-size: clamp(1rem, 2.5vw, 1.6rem);
+  }
+}

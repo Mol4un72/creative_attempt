@@ -1,0 +1,56 @@
+.header {
+  display: flex;
+  align-items: center;
+  padding: 0 clamp(10px, 5vw, 40px);
+  height: clamp(60px, 10vh, 104px);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  box-sizing: border-box;
+  backdrop-filter: blur(2px);
+
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0; /* лого не зменшується занадто сильно */
+  width: clamp(100px, 20vw, 224px); /* адаптивна ширина лого */
+}
+
+.logo img {
+  width: 100%;
+  height: auto;
+}
+
+.searchIcon {
+  display: flex;
+  align-items: center;
+  transform: translateY(5px); /* опускає вниз */
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 3vw, 35px); /* адаптивний gap між кнопками */
+  margin-left: auto;             /* блок праворуч */
+  font-size: clamp(12px, 1.5vw, 24px); /* адаптивний текст */
+  color: #fff;
+}
+
+.buttons span {
+  white-space: nowrap;           /* текст не ламається на частини */
+  cursor: pointer;
+}
+
+.buttons img {
+  width: clamp(24px, 2vw, 40px); /* іконки адаптивні */
+  height: auto;
+}

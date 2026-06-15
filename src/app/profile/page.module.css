@@ -1,0 +1,72 @@
+.page {
+    min-height: 100vh;
+    color: #FFFF;
+}
+
+.header{
+    display: flex;
+    flex-direction: row;
+    margin-top: 160px;
+    gap: 16px;
+    background-color: #263238;
+    padding: 16px;
+    border: 1px solid #FFFF;
+    border-right: none;
+    border-left: none;
+}
+
+.leftSide{
+    display: flex;
+    align-items: center;
+    margin-left: 32px;
+    gap: 16px;
+}
+
+.avatar{
+    height: 160px;
+    width: 160px;
+    background-color: #FFFF;
+    border: 2px solid black;
+    border-radius: 50%;
+}
+
+.nickname{
+    display: flex;
+    flex-direction: row;
+    font-size: 56px;
+    font-weight: 700;
+    gap: 8px;
+}
+
+.settingsImg{
+    width: 40px;
+    height: 40px;
+    transform: translateY(28px)
+}
+
+.achievements{
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin: 0 auto;
+}
+
+.achievement {
+    border: 1px solid #FFFF;
+    border-radius: 50%;
+    width: 104px;
+    height: 104px;
+}
+
+.cards{
+    display: grid;
+    grid-template-columns: repeat(6, auto);
+    justify-content: center;
+    gap: 40px;
+    margin-top: 56px;
+}
+
+.cards > * {
+    margin-bottom: 24px;
+}
+

@@ -1,0 +1,32 @@
+.card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid #FFFF;
+    border-radius: 8px;
+    background-color: #263238;
+    width: 568px;
+    height: 800px;
+    color: #FFFF;
+    font-size: 18px;
+    background-color:#263238;
+    margin-top: 40px;
+}
+
+.imageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #FFFF;
+    width: 400px;
+    height: 600px;
+}
+
+.info{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 16px;
+    gap: 8px;
+}

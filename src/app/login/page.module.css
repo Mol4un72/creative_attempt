@@ -1,0 +1,98 @@
+.loginPage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: #101822;
+}
+
+.card {
+  width: min(430px, 100%);
+  background: #1f2937;
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.emailButton,
+.submitButton,
+.socialButton {
+  width: 368px;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 14px 18px;
+  font-size: 1rem;
+  color: #ffffff;
+  background: #27272a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+}
+
+.emailButton {
+  background: #27272a;
+}
+
+.socialButton {
+  background: #27272a;
+}
+
+.submitButton {
+  background: #00e5ff;
+  color: #000000;
+  border: none;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.95rem;
+  margin: 0.5rem 0;
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.separatorText {
+  white-space: nowrap;
+}
+
+.form {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.form input{
+  width: 368px;
+}
+
+.registerText {
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.registerLink {
+  color: #00e5ff;
+  text-decoration: underline;
+}
+
+@media (max-width: 520px) {
+  .card {
+    padding: 1.5rem;
+  }
+}
