@@ -24,11 +24,6 @@ export default function AboutUsPage() {
             curiosity. If you want to follow the journey, check out the
             GitHub repository.
           </p>
-          <img
-            src="/about_us.png"
-            alt="About us illustration"
-            className={style.illustration}
-          />
         </div>
       </main>
     </div>

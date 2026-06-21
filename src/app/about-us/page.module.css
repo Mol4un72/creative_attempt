@@ -48,14 +48,6 @@
   line-height: 1.7;
 }
 
-.illustration {
-  width: clamp(100px, 25%, 180px);
-  height: auto;
-  border-radius: var(--radius-md);
-  margin-top: 0.5rem;
-  align-self: center;
-}
-
 @media (max-width: 480px) {
   .card { border-radius: var(--radius-lg); }
 }

@@ -41,6 +41,11 @@
 }
 
 @media (max-width: 560px) {
-  .card { width: 100%; border-radius: var(--radius-md); }
+  .card {
+    width: min(360px, 100%);
+    max-width: 20rem;
+    margin: 0 auto;
+    border-radius: var(--radius-md);
+  }
   .imageContainer { height: 240px; }
 }

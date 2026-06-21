@@ -127,10 +127,4 @@
     grid-template-columns: 1fr;
     padding-top: calc(72px + 1.5rem);
   }
-  .leftCol {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem;
-  }
 }

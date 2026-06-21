@@ -151,4 +151,10 @@
   .profileBanner { flex-direction: column; }
   .achievements  { margin-left: 0; }
   .cards         { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  .nicknameRow {
+    gap: 0;
+    .settingsBtn {
+      transform: translateY(1px)
+    }
+  }
 }

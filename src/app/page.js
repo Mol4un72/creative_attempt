@@ -44,7 +44,13 @@ export default function Home() {
             </Link>
           </div>
         </div>
-          <span />
+
+        <div className={styles.heroSide}>
+          <img
+            src="/main_right_side.png"
+            alt="Right-side hero illustration"
+          />
+        </div>
       </main>
 
       {/* ── How it Works ── */}

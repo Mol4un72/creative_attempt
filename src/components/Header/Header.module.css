@@ -101,7 +101,6 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-left: 0.5rem;
 }
 
 .iconBtn {
@@ -141,7 +140,7 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 8px;
+  padding: 6px;
   border-radius: var(--radius-sm);
   transition: background-color var(--transition);
 }
@@ -197,4 +196,13 @@
 @media (max-width: 768px) {
   .nav   { display: none; }
   .hamburger { display: flex; }
+  .actions { margin-left: auto; }
+  .iconBtn {
+    width: 32px;
+    height: auto;
+  }
+  .logo {
+    width: 104px;
+    height: auto;
+  }
 }

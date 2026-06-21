@@ -125,5 +125,10 @@
 }
 
 @media (max-width: 480px) {
-  .dropzone { min-height: 280px; padding: 2rem 1rem; }
+  .dropzone {
+    width: 20rem;
+  }
+  .card{
+    width: 20rem;
+  }
 }

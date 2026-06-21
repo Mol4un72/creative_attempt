@@ -27,6 +27,15 @@
   z-index: 0;
 }
 
+.heroSide {
+  position: absolute;
+  right: clamp(1.5rem, 6vw, 7rem);
+  bottom: 0;
+  z-index: 2;
+  display: block;
+  pointer-events: none;
+}
+
 /* Gradient overlay for hierarchy — dark at bottom, tinted at top */
 .heroOverlay {
   position: absolute;
@@ -220,7 +229,7 @@
 
 /* ─── DONATE / SUPPORT ──────────────────────────────────────────── */
 .donate {
-  width: 640px;
+  width: max-content;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -282,6 +291,28 @@
 /* ─── Responsive ────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .stepsGrid { grid-template-columns: 1fr; max-width: 300px; }
-  .donate    { margin: 0 1rem 3.5rem; }
-  .heroContent { gap: 1.25rem; }
+  .donate    { 
+    max-width: 368px;
+   }
+  .stepImage {
+    width: 160px;
+  }
+  .heroContent{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    .actions {
+      display: flex;
+      justify-content: center;
+      button {
+        width: 296px;
+      }
+    }
+  }
+  .heroBg {
+    background: url('/main_bg_phone.png') center top / cover no-repeat;
+  }
+  .heroSide {
+    display: none;
+  }
 }
