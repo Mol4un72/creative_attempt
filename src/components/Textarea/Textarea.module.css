@@ -1,35 +1,47 @@
-.input {
-  background-color: #00e5ff00;
-  border: 1px solid #00B9B9;
-  border-radius: 8px;
-  color: #000000;
-  padding: 8px 8px;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  width: 312px;
-  height: 160px;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  width: 100%;
+}
+
+.label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-muted);
+  letter-spacing: 0.02em;
+}
+
+.textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
   box-sizing: border-box;
-  color: #FFFF;
-  text-align: left;
+  outline: none;
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+  transition:
+    border-color var(--transition),
+    background-color var(--transition),
+    box-shadow var(--transition);
 }
 
-@media (max-width: 720px) {
-  .button {
-    width: 100%;
-    max-width: 100%;
-    padding: 14px 20px;
-    font-size: 18px;
-  }
+.textarea::placeholder {
+  color: var(--color-muted);
 }
 
-@media (max-width: 480px) {
-  .button {
-    font-size: 16px;
-    padding: 12px 18px;
-  }
+.textarea:hover {
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.textarea:focus {
+  border-color: var(--color-primary);
+  background: rgba(0, 229, 255, 0.04);
+  box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.12);
 }

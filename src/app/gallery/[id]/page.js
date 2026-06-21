@@ -1,40 +1,64 @@
 import Header from "../../../components/Header/Header";
 import Card from "../../../components/Card/Card";
-import style from "./page.module.css"
+import Link from "next/link";
+import styles from "./page.module.css";
 
+/* Shared arts data — in a real app this would come from an API/DB */
 const arts = [
-    {id: 1, name: "Gigachad", price: 1000, time: 1000, image: "/img.png"},
-    {id: 2, name: "Gigachad", price: 1000, time: 1000, image: "/img.png"},
-    {id: 3, name: "Gigachad", price: 1000, time: 1000, image: "/img.png"},
-    {id: 4, name: "Gigachad", price: 1000, time: 1000, image: "/img.png"},
-    {id: 5, name: "Gigachad", price: 1000, time: 1000, image: "/img.png"},
-    {id: 6, name: "Gigachad", price: 1000, time: 1000, image: "/img.png"},
-    {id: 7, name: "Gigachad", price: 1000, time: 1000, image: "/img.png"},
-    {id: 8, name: "Gigachad", price: 1000, time: 1000, image: "/img.png"},
-    {id: 9, name: "Gigachad", price: 1000, time: 1000, image: "/img.png"},
-    {id: 10, name: "Gigachad", price: 1000, time: 1000, image: "/img.png"},
-    {id: 11, name: "Gigachad", price: 1000, time: 1000, image: "/img.png"},
-    {id: 12, name: "Gigachad", price: 1000, time: 1000, image: "/img.png"},
-]
+  { id: 1,  name: "Gigachad",     price: 1000, time: 1000, image: "/img.png" },
+  { id: 2,  name: "Pepe",         price: 500,  time: 800,  image: "/img.png" },
+  { id: 3,  name: "Doge",         price: 750,  time: 600,  image: "/img.png" },
+  { id: 4,  name: "Wojak",        price: 200,  time: 1200, image: "/img.png" },
+  { id: 5,  name: "Nyan Cat",     price: 300,  time: 400,  image: "/img.png" },
+  { id: 6,  name: "Shiba",        price: 900,  time: 900,  image: "/img.png" },
+  { id: 7,  name: "Trollface",    price: 150,  time: 300,  image: "/img.png" },
+  { id: 8,  name: "Rickroll",     price: 420,  time: 500,  image: "/img.png" },
+  { id: 9,  name: "Drakeposting", price: 600,  time: 700,  image: "/img.png" },
+  { id: 10, name: "Grumpy Cat",   price: 850,  time: 1100, image: "/img.png" },
+  { id: 11, name: "Distracted",   price: 350,  time: 600,  image: "/img.png" },
+  { id: 12, name: "Success Kid",  price: 450,  time: 800,  image: "/img.png" },
+];
+
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const art = arts.find((a) => a.id == id);
+  return {
+    title: art ? art.name : "Artwork not found",
+  };
+}
 
 export default async function CardPage({ params }) {
-    const { id } = await params;
+  const { id } = await params;
+  const art = arts.find((a) => a.id == id);
 
-    const art = arts.find((a) => a.id == id);
-
-    if (!art) {
-        return (
-            <div>
-                <Header />
-                <h2>Not found</h2>
-            </div>
-        );
-    }
-
+  /* ── Not found state ── */
+  if (!art) {
     return (
-        <div className={style.page}>
-            <Header />
-            <Card variant="full" art={art} />
-        </div>
+      <div className={styles.page}>
+        <Header />
+        <main className={styles.notFound}>
+          <span className={styles.notFoundIcon}>😕</span>
+          <h1 className={styles.notFoundTitle}>Artwork not found</h1>
+          <p className={styles.notFoundSub}>
+            The artwork you&apos;re looking for doesn&apos;t exist or has been removed.
+          </p>
+          <Link href="/gallery" className={styles.backLink}>
+            ← Back to Gallery
+          </Link>
+        </main>
+      </div>
     );
+  }
+
+  return (
+    <div className={styles.page}>
+      <Header />
+      <main className={styles.main}>
+        <Link href="/gallery" className={styles.backLink}>
+          ← Back to Gallery
+        </Link>
+        <Card variant="full" art={art} />
+      </main>
+    </div>
+  );
 }

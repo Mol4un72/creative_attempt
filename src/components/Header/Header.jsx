@@ -1,58 +1,105 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
-import Link from "next/link";
+import Link from 'next/link';
 import styles from './Header.module.css';
 
-export default function Header() {
-  const [hidden, setHidden] = useState(false);
+/** Nav links rendered in header */
+const NAV_LINKS = [
+  { href: '/gallery',    label: 'Gallery' },
+  { href: '/create',     label: 'Create' },
+  { href: '/contact-us', label: 'Contact' },
+  { href: '/about-us',   label: 'About' },
+];
 
+export default function Header() {
+  const [hidden,   setHidden]   = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  
+  /* ── Hide header on scroll down, show on scroll up ── */
   useEffect(() => {
     let lastScrollY = window.scrollY;
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
-      // ховаємо після 100px скролу вниз
-      if (currentScrollY > 100 && currentScrollY > lastScrollY) {
-        setHidden(true);
-      } else {
-        setHidden(false);
-      }
-
+      setHidden(currentScrollY > 80 && currentScrollY > lastScrollY);
       lastScrollY = currentScrollY;
     };
 
-    window.addEventListener('scroll', handleScroll);
-
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  /* ── Close menu on Escape ── */
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (e.key === 'Escape') {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener('keydown', handleKey);
+    return () => document.removeEventListener('keydown', handleKey);
+  }, []);
+
   return (
-    <header
-      className={`${styles.header} ${hidden ? styles.hidden : ''}`}
-    >
+    <header className={`${styles.header} ${hidden ? styles.hidden : ''}`}>
+      {/* ── Logo ── */}
       <div className={styles.logo}>
-        <a href="/">
-          <Image src="/logo.png" alt="Creative Attempt" width={224} height={80} />
-        </a>
-      </div>
-
-      <div className={styles.buttons}>
-        <Link href="/gallery">Gallery</Link>
-        <Link href="/create">Create</Link>
-        <Link href="/contact-us">Contact us</Link>
-        <Link href="/about-us">About us</Link>
-
-        <span className={styles.searchIcon}>
-          <Image src="/search_btn.svg" alt="Пошук" width={40} height={40} />
-        </span>
-
-        <Link href="/profile">
-          <Image src="/profile.svg" alt="Профіль" width={40} height={40} />
+        <Link href="/">
+          <Image src="/logo.png" alt="Creative Attempt" width={180} height={64} priority style={{ width: '100%', height: 'auto' }} />
         </Link>
       </div>
+
+      {/* ── Desktop Nav ── */}
+      <nav className={styles.nav} aria-label="Main navigation">
+        {NAV_LINKS.map(({ href, label }) => (
+          <Link key={href} href={href} className={`${styles.navLink} ${
+            pathname === href ? styles.active : ''
+          }`}>
+            {label}
+          </Link>
+        ))}
+      </nav>
+
+      {/* ── Actions ── */}
+      <div className={styles.actions}>
+        {/* Profile */}
+        <Link href="/profile" className={styles.iconBtn} aria-label="Profile">
+          <Image src="/profile.svg" alt="" width={22} height={22} style={{ width: '32px', height: '32px' }} />
+        </Link>
+
+        {/* Hamburger (mobile) */}
+        <button
+          id="header-menu-btn"
+          className={`${styles.hamburger} ${menuOpen ? styles.hamburgerOpen : ''}`}
+          onClick={() => setMenuOpen((v) => !v)}
+          aria-label="Toggle menu"
+          aria-expanded={menuOpen}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+      </div>
+
+      {/* ── Mobile Drawer ── */}
+      {menuOpen && (
+        <nav className={styles.mobileMenu} aria-label="Mobile navigation">
+          {NAV_LINKS.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className={styles.mobileLink}
+              onClick={() => setMenuOpen(false)}
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+      )}
     </header>
   );
 }

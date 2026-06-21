@@ -6,48 +6,67 @@ import { FastAverageColor } from "fast-average-color";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 
-export default function CreateCard({ price, name, image}) {
-    const imgRef = useRef(null);
-    const [bgColor, setBgColor] = useState("#263238");
+/**
+ * CreateCard — preview card shown on the /create page after an image is selected.
+ * Extracts dominant colour from the uploaded image and uses it as the background.
+ *
+ * Props:
+ *  - image: object URL of the uploaded file (string)
+ */
+export default function CreateCard({ image }) {
+  const imgRef  = useRef(null);
+  const [bgColor, setBgColor] = useState("var(--color-surface-2)");
 
-    useEffect(() => {
-        const fac = new FastAverageColor();
-        const img = imgRef.current;
+  /* ── Extract dominant colour from uploaded image ── */
+  useEffect(() => {
+    const fac = new FastAverageColor();
+    const img = imgRef.current;
+    if (!img) return;
 
-        const handleLoad = () => {
-            const color = fac.getColor(img);
+    const extract = () => {
+      try {
+        setBgColor(fac.getColor(img).rgb);
+      } catch {
+        /* ignore – local blob URLs are same-origin so this rarely fails */
+      }
+    };
 
-            setBgColor(color.rgb); // або color.rgba
-        };
+    if (img.complete) {
+      extract();
+    } else {
+      img.addEventListener("load", extract);
+    }
 
-        if (!img) return;
+    return () => {
+      img.removeEventListener("load", extract);
+      fac.destroy?.();
+    };
+  }, [image]);
 
-        if (img.complete) {
-            handleLoad();
-        } else {
-            img.addEventListener("load", handleLoad);
-        }
-    }, []);
+  return (
+    <section className={styles.card} aria-label="Artwork preview">
+      {/* ── Image preview ── */}
+      <div className={styles.imageContainer} style={{ backgroundColor: bgColor }}>
+        {image ? (
+          <img
+            ref={imgRef}
+            src={image}
+            alt="Artwork preview"
+            className={styles.image}
+          />
+        ) : (
+          <span className={styles.imagePlaceholder}>No image</span>
+        )}
+      </div>
 
-    return (
-        <div className={styles.card}>
-            <div
-                className={styles.imageContainer}
-                style={{ backgroundColor: bgColor }}
-            >
-                <img
-                    ref={imgRef}
-                    src={image}
-                    alt="Artwork"
-                    className={styles.image}
-                />
-            </div>
-
-            <div className={styles.info}>
-                <Input placeholder="Name"/>
-                <Input placeholder="Price"/>
-                <Button>Submit</Button>
-            </div>
-        </div>
-    );
+      {/* ── Form fields ── */}
+      <div className={styles.fields}>
+        <Input id="create-name"  placeholder="Artwork name"  label="Name" />
+        <Input id="create-price" placeholder="Price in USD"  label="Price ($)" type="number" min="0" />
+        <Button type="submit" size="lg" style={{ width: "100%" }}>
+          Submit
+        </Button>
+      </div>
+    </section>
+  );
 }

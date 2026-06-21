@@ -4,79 +4,100 @@ import styles from "./Card.module.css";
 import { useEffect, useRef, useState } from "react";
 import { FastAverageColor } from "fast-average-color";
 import Button from "../Button/Button";
-import Input from "../Input/Input";
 
+/**
+ * Card component — displays an artwork tile.
+ *
+ * Props:
+ *  - art: { id, name, price, time, image }
+ *  - variant: "default" | "full"
+ *    • "default" → compact grid tile (links to detail page)
+ *    • "full"    → expanded detail view with bet UI
+ */
 export default function Card({ art, variant = "default" }) {
-    const { name, price, time, image } = art;
-    const imgRef = useRef(null);
-    const [bgColor, setBgColor] = useState("#263238");
-    const hasMeta = price && time;
-    const isFull = variant === "full";
+  const { name, price, time, image } = art;
+  const imgRef   = useRef(null);
+  const [bgColor, setBgColor] = useState("transparent");
 
-    useEffect(() => {
-        const fac = new FastAverageColor();
-        const img = imgRef.current;
+  const hasMeta = price != null && time != null;
+  const isFull  = variant === "full";
 
-        if (!img) return;
+  /* ── Extract dominant colour from artwork image ── */
+  useEffect(() => {
+    const fac = new FastAverageColor();
+    const img = imgRef.current;
+    if (!img) return;
 
-        const handleLoad = () => {
-            const color = fac.getColor(img);
-            setBgColor(color.rgb);
-        };
+    const extract = () => {
+      try {
+        const color = fac.getColor(img);
+        // Darken the extracted colour slightly for a nicer bg
+        setBgColor(color.rgb);
+      } catch {
+        /* silently ignore cross-origin images */
+      }
+    };
 
-        img.addEventListener("load", handleLoad);
+    if (img.complete) {
+      extract();
+    } else {
+      img.addEventListener("load", extract);
+    }
 
-        if (img.complete) {
-            handleLoad();
-        }
+    return () => {
+      img.removeEventListener("load", extract);
+      fac.destroy?.();
+    };
+  }, [image]);
 
-        return () => {
-            img.removeEventListener("load", handleLoad);
-            fac.destroy?.();
-        };
-    }, [image]);
+  return (
+    <article className={`${styles.card} ${styles[variant]}`}>
+      {/* ── Image area ── */}
+      <div className={styles.imageContainer} style={{ backgroundColor: bgColor }}>
+        <img
+          ref={imgRef}
+          src={image}
+          alt={name}
+          className={styles.image}
+          crossOrigin="anonymous"
+        />
+      </div>
 
-    return (
-        <div className={`${styles.card} ${styles[variant]}`}>
-            <div
-                className={styles.imageContainer}
-                style={{ backgroundColor: bgColor }}
-            >
-                <img
-                    ref={imgRef}
-                    src={image}
-                    alt="Artwork"
-                    className={styles.image}
-                />
+      {/* ── Info bar ── */}
+      <div className={styles.info}>
+        <p className={`${styles.name} ${!hasMeta ? styles.centerName : ""}`}>
+          {name}
+        </p>
+
+        {hasMeta && (
+          <>
+            <hr className={styles.hr} />
+            <div className={styles.details}>
+              <span className={styles.price}>{price}$</span>
+              <span className={styles.time}>
+                {time}
+                <img src="/clock.svg" alt="time left" className={styles.clockIcon} />
+              </span>
             </div>
+          </>
+        )}
+      </div>
 
-            <div className={styles.info}>
-                <p className={`${styles.name} ${!hasMeta ? styles.centerName : ""}`}>
-                    {name}
-                </p>
-
-                {hasMeta && <hr className={styles.hr} />}
-
-                {hasMeta && (
-                <div className={styles.details}>
-                    {price && <p>{price}$</p>}
-                    {time && <p>
-                                {time}
-                                <span className={styles.time}>
-                                    <img src="/clock.svg"></img>
-                                </span>
-                            </p>
-                    }
-                </div>
-                )}
-            </div>
-
-            {isFull && (
-                <div className={styles.fullBlock}>
-                    <Input placeholder="Price"/>
-                    <Button>Bet</Button>
-                </div>
-            )}
+      {/* ── Bet block (full variant only) ── */}
+      {isFull && (
+        <div className={styles.betBlock}>
+          <input
+            className={styles.betInput}
+            type="number"
+            placeholder="Your bid ($)"
+            min={price}
+            aria-label="Enter your bid"
+          />
+          <Button className={styles.betBtn} type="button" size="md">
+            Place Bid
+          </Button>
         </div>
-    );
+      )}
+    </article>
+  );
 }

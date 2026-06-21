@@ -1,87 +1,236 @@
-.card{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    border: 1px solid #FFFF;
-    border-radius: 8px;
-    background-color: #263238;
-    color: #FFFF;
-    font-size: 18px;
-    background-color:#263238;
+/* ─── Base Card ─────────────────────────────────────────────────── */
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-md);
+  background: var(--gradient-card);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  overflow: hidden;
+  position: relative;
+  /* Subtle top-edge highlight for depth */
+  box-shadow:
+    var(--shadow-card),
+    0 1px 0 rgba(255,255,255,0.05) inset;
+  transition:
+    transform var(--transition-slow),
+    box-shadow var(--transition-slow),
+    border-color var(--transition-slow);
 }
 
-.default{
-    width: 264px;
-    height: 392px;
+/* Gradient border on hover via pseudo-element */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--gradient-brand);
+  /* Mask trick: show only the border */
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity var(--transition);
+  pointer-events: none;
 }
 
-.full{
-    margin-top: 40px;
-    width: 568px;
-    height: 800px;
-    .imageContainer{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid #FFFF;
-        width: 400px;
-        height: 600px;
-    }
-    .name{
-        display: flex;
-        justify-content: center;
-        font-size: 32px;
-    }
-    .details{
-        font-size: 24px;
-    }
-    .hr{
-        width: 312px;
-    }
-    .time img {
-        width: 24px;
-        height: 24px;
-    }
+/* ─── Variants ──────────────────────────────────────────────────── */
+.default {
+  width: 220px;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.time {
-    display: inline-flex;
-    align-items: center;
-    margin-left: 6px;
-    }
-.time img {
-    width: 20px;
-    height: 20px;
-    transform: translateY(2px);
+.default:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow:
+    var(--shadow-deep),
+    var(--shadow-glow);
 }
 
-.fullBlock{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 8px;
+.default:hover::before {
+  opacity: 1;
 }
 
+.full {
+  width: min(520px, 100%);
+  margin: 0 auto;
+}
+
+/* ─── Image Container ───────────────────────────────────────────── */
 .imageContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #FFFF;
-    width: 192px;
-    height: 304px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  transition: background-color 0.5s ease;
+}
+
+.default .imageContainer { height: 220px; }
+.full   .imageContainer  { height: 480px; }
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Colour vignette overlay at bottom of image */
+.imageContainer::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* ─── Info Bar ──────────────────────────────────────────────────── */
+.info {
+  padding: 0.875rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.name {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.full .name {
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.centerName { text-align: center; }
+
+.hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
 }
 
 .details {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
 }
 
-.info{
-    margin-top: 8px;
+/* Price: vivid gradient text for maximum pop */
+.price {
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--color-text);
+  -webkit-background-clip: text;
+  background-clip: text;
 }
 
-.hr{
-    width: 232px;
+.time {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-text);
+  font-size: 1.05rem;
+}
+
+.clockIcon {
+  width: 20px;
+  height: 20px;
+  opacity: 0.6;
+}
+
+/* ─── Bet Block (full only) ─────────────────────────────────────── */
+.betBlock {
+  display: flex;
+  gap: 0.625rem;
+  padding: 0 1rem 1.25rem;
+  flex-wrap: wrap;
+}
+
+.full .price {
+  font-size: 1.5rem;
+}
+
+.full .time {
+  font-size: 1.5rem;
+}
+
+.full .clockIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.betInput {
+  flex: 1;
+  min-width: 120px;
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  outline: none;
+  text-align: center;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.betInput::-webkit-outer-spin-button,
+.betInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.betInput[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.betInput::placeholder { color: var(--color-muted); }
+
+.betInput:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-glow);
+}
+
+.betBtn {
+  padding: 0.7rem 1.75rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: var(--gradient-brand-sm);
+  color: #000;
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-btn);
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    filter var(--transition);
+}
+
+.betBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+  filter: brightness(1.08);
+}
+
+/* ─── Responsive ────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .default { width: 160px; }
+  .default .imageContainer { height: 160px; }
+  .full    { width: 100%; }
+  .full .imageContainer { height: 300px; }
 }

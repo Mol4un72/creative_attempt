@@ -1,82 +1,187 @@
+/* ─── Page Shell ────────────────────────────────────────────────── */
 .page {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
-  background-color: #182230;
+  background-color: var(--color-bg);
 }
 
+/* ─── HERO ──────────────────────────────────────────────────────── */
 .hero {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  min-height: 70vh;
-  max-height: 760px;
-  padding: 4rem 1.5rem 2rem;
-  position: relative;
+  min-height: 100svh;
+  padding: clamp(7rem, 12vw, 10rem) clamp(1.5rem, 7vw, 7rem) clamp(5rem, 8vw, 7rem);
   overflow: hidden;
-  background-color: #000000;
+  background-color: #03080f;
 }
 
-.hero::before {
-  content: '';
+/* Background image layer */
+.heroBg {
   position: absolute;
   inset: 0;
   background: url('/main_bg.png') center top / cover no-repeat;
-  filter: blur(10px);
-  transform: scale(1.05);
-  opacity: 0.9;
+  filter: blur(10px) brightness(0.35) saturate(1.4);
+  transform: scale(1.06);
   z-index: 0;
 }
 
-.heroContent {
-  max-width: 1200px;
-  width: 100%;
-  margin-left: 1rem;
-  position: relative;
+/* Gradient overlay for hierarchy — dark at bottom, tinted at top */
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 20% 40%, rgba(0,229,255,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 50% at 80% 70%, rgba(124,58,237,0.10) 0%, transparent 65%),
+    linear-gradient(to bottom, rgba(3,8,15,0.2) 0%, rgba(3,8,15,0.75) 100%);
   z-index: 1;
+  pointer-events: none;
 }
 
+.heroContent {
+  position: relative;
+  z-index: 2;
+  max-width: 780px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Eyebrow pill badge */
+.heroEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  padding: 0.35rem 0.9rem;
+  border: 1px solid rgba(0, 229, 255, 0.28);
+  border-radius: 99px;
+  background: rgba(0, 229, 255, 0.06);
+  backdrop-filter: blur(8px);
+  width: fit-content;
+}
+
+.heroEyebrow::before {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  box-shadow: 0 0 6px var(--color-primary);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.7); }
+}
+
+/* Main title — massive, hierarchy-dominant */
 .title {
-  font-size: clamp(32px, 5vw, 104px);
-  font-weight: 800;
-  line-height: 1.02;
-  margin: 0;
-  color: #ffffff;
-  white-space: nowrap;
-  overflow-wrap: normal;
+  font-size: clamp(3.5rem, 10vw, 8.5rem);
+  font-weight: 900;
+  line-height: 0.93;
+  letter-spacing: -0.04em;
+  color: #fff;
+  /* Subtle text shadow for depth on blurred bg */
+  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.8);
+}
+
+/* First word gets the gradient treatment */
+.titleAccent {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .description {
-  font-size: clamp(32px, 4vw, 64px);
-  color: #ffffff;
-  margin: 1.5rem 0 0;
-  max-width: 1200px;
-  line-height: 1.4;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: rgba(220, 235, 255, 0.72);
+  line-height: 1.75;
+  max-width: 480px;
 }
 
 .actions {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-top: 1.75rem;
+  margin-top: 0.5rem;
 }
 
-.primaryBtn {
-  min-width: 140px;
-}
-
-.secondaryBtn {
-  background-color: transparent;
-  color: #ffffff;
-  border: 2px solid #ffffff;
-}
-
+/* ─── HOW IT WORKS ──────────────────────────────────────────────── */
 .steps {
-  margin: 8rem;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(5rem, 9vw, 8rem) clamp(1.5rem, 6vw, 5rem);
+  position: relative;
+  /* Section separator: gradient fade from bg */
+  background: linear-gradient(180deg,
+    var(--color-bg) 0%,
+    var(--color-bg-alt) 40%,
+    var(--color-bg-alt) 60%,
+    var(--color-bg) 100%
+  );
+}
+
+/* Decorative ambient glow behind steps */
+.steps::before {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 50%;
+  background: radial-gradient(ellipse, rgba(0, 229, 255, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.stepsHeader {
+  text-align: center;
+  margin-bottom: clamp(3rem, 5vw, 5rem);
+}
+
+.sectionTitle {
+  font-size: clamp(1.75rem, 4vw, 2.875rem);
+  font-weight: 800;
+  color: var(--color-text);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+/* Accent underline on section heading */
+.sectionTitle::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--gradient-brand-sm);
+  border-radius: 99px;
+  margin: 0.75rem auto 0;
+}
+
+.sectionSub {
+  margin-top: 0.875rem;
+  font-size: clamp(0.9rem, 1.5vw, 1.0625rem);
+  color: var(--color-text-dim);
+  line-height: 1.6;
+}
+
+.stepsGrid {
   display: grid;
-  gap: 1.5rem;
-  padding: 0 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: clamp(2.5rem, 8vw, 8rem);
+  max-width: 960px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 .step {
@@ -84,87 +189,99 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 1rem;
-  margin: 0;
+  gap: 1.25rem;
+  position: relative;
+  max-width: 220px;
+}
+
+.stepImageWrap {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.stepImageWrap:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-deep), var(--shadow-glow);
 }
 
 .stepImage {
-  width: min(260px, 100%);
+  width: min(220px, 100%);
   height: auto;
-  border-radius: 24px;
-  object-fit: cover;
+  display: block;
 }
 
 .stepLabel {
-  color: #ffffff;
-  font-size: clamp(1.2rem, 2vw, 2rem);
-  font-weight: 600;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 800;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+  position: relative;
+  z-index: 1;
 }
 
+/* ─── DONATE / SUPPORT ──────────────────────────────────────────── */
 .donate {
+  width: 640px;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 1rem;
-  padding: 2rem 1.5rem;
-  margin: 6rem auto 2rem;
-  max-width: 700px;
-  width: min(100%, 700px);
-  align-self: center;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.08);
+  gap: 1.25rem;
+  padding: clamp(3.5rem, 7vw, 6rem) clamp(1.5rem, 6vw, 4rem);
+  margin: 0 clamp(1rem, 4vw, 3rem) clamp(4rem, 7vw, 6rem);
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  /* Tinted glass surface — stands out from bg */
+  background: linear-gradient(135deg,
+    rgba(0, 229, 255, 0.06) 0%,
+    rgba(17, 29, 46, 0.95) 50%,
+    rgba(124, 58, 237, 0.07) 100%
+  );
+  border: 1px solid rgba(0, 229, 255, 0.14);
+  box-shadow:
+    var(--shadow-deep),
+    0 0 80px rgba(0, 229, 255, 0.06) inset;
 }
 
-.donate h2 {
-  margin: 0;
-  font-size: clamp(1.8rem, 3vw, 2.8rem);
-  color: #ffffff;
+/* Ambient radial glow centred on donate card */
+.donateGlow {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 300px;
+  background: radial-gradient(ellipse,
+    rgba(0, 229, 255, 0.15) 0%,
+    rgba(124, 58, 237, 0.08) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
 }
 
-.donate p {
-  margin: 0;
-  color: #ffffff;
-  max-width: 640px;
-  font-size: clamp(1.1rem, 2vw, 1.5rem);
-  line-height: 1.6;
+.donateTitle {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 900;
+  color: var(--color-text);
+  letter-spacing: -0.03em;
+  position: relative;
+  z-index: 1;
 }
 
-@media (min-width: 768px) {
-  .hero {
-    padding: 5rem 3rem 3rem;
-  }
-
-  .steps {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    padding: 0 3rem;
-  }
-
-  .donate {
-    margin: 0 3rem 3rem;
-  }
+.donateSub {
+  font-size: clamp(0.9rem, 1.5vw, 1.0625rem);
+  color: var(--color-text-dim);
+  max-width: 460px;
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
 }
 
-@media (min-width: 1024px) {
-  .hero {
-    padding: 6rem 4rem 4rem;
-  }
-
-  .steps {
-    gap: 2rem;
-  }
-
-  .donate {
-    padding: 3rem 4rem;
-  }
-}
-
-@media (max-width: 900px) {
-  .stepImage {
-    max-width: 220px;
-  }
-
-  .stepLabel {
-    font-size: clamp(1rem, 2.5vw, 1.6rem);
-  }
+/* ─── Responsive ────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .stepsGrid { grid-template-columns: 1fr; max-width: 300px; }
+  .donate    { margin: 0 1rem 3.5rem; }
+  .heroContent { gap: 1.25rem; }
 }

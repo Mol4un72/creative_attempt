@@ -1,64 +1,108 @@
-import style from "./page.module.css"
-import Header from "../../components/Header/Header"
-import Card from "../../components/Card/Card"
+import style from "./page.module.css";
+import Header from "../../components/Header/Header";
+import Card from "../../components/Card/Card";
+import Link from "next/link";
 
+export const metadata = {
+  title: "Profile",
+};
+
+/* Placeholder arts — replace with real user data fetch */
 const arts = [
-    {id: 1, name: "Gigachad", price: 1000, time: 1000, image: "/img.png"},
-    {id: 2, name: "Gigachad", price: 1000, time: 1000, image: "/img.png"},
-    {id: 3, name: "Gigachad", price: 1000, time: 1000, image: "/img.png"},
-    {id: 4, name: "Gigachad", price: 1000, time: 1000, image: "/img.png"},
-    {id: 5, name: "Gigachad", price: 1000, time: 1000, image: "/img.png"},
-    {id: 6, name: "Gigachad", price: 1000, time: 1000, image: "/img.png"},
-    {id: 7, name: "Gigachad", price: 1000, time: 1000, image: "/img.png"},
-    {id: 1, name: "Gigachad", price: 1000, time: 1000, image: "/img.png"},
-    {id: 2, name: "Gigachad", price: 1000, time: 1000, image: "/img.png"},
-    {id: 3, name: "Gigachad", price: 1000, time: 1000, image: "/img.png"},
-    {id: 4, name: "Gigachad", price: 1000, time: 1000, image: "/img.png"},
-    {id: 5, name: "Gigachad", price: 1000, time: 1000, image: "/img.png"},
-    {id: 6, name: "Gigachad", price: 1000, time: 1000, image: "/img.png"},
-    {id: 7, name: "Gigachad", price: 1000, time: 1000, image: "/img.png"},
-]
+  { id: 1,  name: "Gigachad",  price: 1000, time: 1000, image: "/img.png" },
+  { id: 2,  name: "Pepe",      price: 500,  time: 800,  image: "/img.png" },
+  { id: 3,  name: "Doge",      price: 750,  time: 600,  image: "/img.png" },
+  { id: 4,  name: "Wojak",     price: 200,  time: 1200, image: "/img.png" },
+  { id: 5,  name: "Nyan Cat",  price: 300,  time: 400,  image: "/img.png" },
+  { id: 6,  name: "Shiba",     price: 900,  time: 900,  image: "/img.png" },
+  { id: 7,  name: "Trollface", price: 150,  time: 300,  image: "/img.png" },
+  { id: 8,  name: "Gigachad",  price: 1000, time: 1000, image: "/img.png" },
+  { id: 9,  name: "Pepe",      price: 500,  time: 800,  image: "/img.png" },
+  { id: 10,  name: "Doge",      price: 750,  time: 600,  image: "/img.png" },
+  { id: 11,  name: "Wojak",     price: 200,  time: 1200, image: "/img.png" },
+  { id: 12,  name: "Nyan Cat",  price: 300,  time: 400,  image: "/img.png" },
+  { id: 13,  name: "Shiba",     price: 900,  time: 900,  image: "/img.png" },
+  { id: 14,  name: "Trollface", price: 150,  time: 300,  image: "/img.png" },
+  { id: 15,  name: "Gigachad",  price: 1000, time: 1000, image: "/img.png" },
+  { id: 16,  name: "Pepe",      price: 500,  time: 800,  image: "/img.png" },
+  { id: 17,  name: "Doge",      price: 750,  time: 600,  image: "/img.png" },
+  { id: 18,  name: "Wojak",     price: 200,  time: 1200, image: "/img.png" },
+  { id: 19,  name: "Nyan Cat",  price: 300,  time: 400,  image: "/img.png" },
+  { id: 20,  name: "Shiba",     price: 900,  time: 900,  image: "/img.png" },
+  { id: 21,  name: "Trollface", price: 150,  time: 300,  image: "/img.png" },
+];
 
 const achievements = [
-    {name: "introduction", rarity: "legendary", image: "/apple_icon.svg"},
-    {name: "introduction", rarity: "legendary", image: "/apple_icon.svg"},
-    {name: "introduction", rarity: "legendary", image: "/apple_icon.svg"},
-    {name: "introduction", rarity: "legendary", image: "/apple_icon.svg"},
-    {name: "introduction", rarity: "legendary", image: "/apple_icon.svg"},
-    {name: "introduction", rarity: "legendary", image: "/apple_icon.svg"},
-    {name: "introduction", rarity: "legendary", image: "/apple_icon.svg"},
-    {name: "introduction", rarity: "legendary", image: "/apple_icon.svg"},
-    {name: "introduction", rarity: "legendary", image: "/apple_icon.svg"},
-    {name: "introduction", rarity: "legendary", image: "/apple_icon.svg"},
-]
+  { name: "First Upload",   rarity: "common",    image: "/apple_icon.svg" },
+  { name: "Top Seller",     rarity: "rare",      image: "/apple_icon.svg" },
+  { name: "First Bid",      rarity: "uncommon",  image: "/apple_icon.svg" },
+  { name: "Pioneer",        rarity: "legendary", image: "/apple_icon.svg" },
+  { name: "100 Likes",      rarity: "rare",      image: "/apple_icon.svg" },
+];
 
-export default function Profile() {
-    return (
-        <div className={style.page}>
-            <Header />
-            <div className={style.header}>
-                <div className={style.leftSide}>
-                    <img className={style.avatar}></img>
-                    <span className={style.nickname}>
-                        Nickname
-                        <img className={style.settingsImg} src="/settings.svg"></img>
-                    </span>
-                </div>
-                <div className={style.achievements}>
-                    {achievements
-                    .map((ach, index) => (
-                        <img key={index} className={style.achievement} src={ach.image}></img>
-                    ))
-                }
-                </div>
+/** Map rarity to a colour accent class */
+const RARITY_CLASS = {
+  common:    style.common,
+  uncommon:  style.uncommon,
+  rare:      style.rare,
+  legendary: style.legendary,
+};
+
+export default function ProfilePage() {
+  return (
+    <div className={style.page}>
+      <Header />
+
+      <main>
+        {/* ── Profile banner ── */}
+        <section className={style.profileBanner} aria-label="User profile">
+          <div className={style.avatarWrap}>
+            {/* Placeholder avatar — replace with real user avatar */}
+            <div className={style.avatar} aria-label="User avatar" />
+          </div>
+
+          <div className={style.profileInfo}>
+            <div className={style.nicknameRow}>
+              <h1 className={style.nickname}>Nickname</h1>
+              <Link href="/profile/settings-page" className={style.settingsBtn} aria-label="Profile settings">
+                <img src="/settings.svg" alt="" width={22} height={22} />
+              </Link>
             </div>
-            <div className={style.cards}>
-                {arts
-                  .filter((art) => art.image)
-                  .map((art) => (
-                    <Card key={art.id} art={art} />
-                ))}
-            </div>
-        </div>
-    );
+            <p className={style.profileStats}>
+              <span><strong>{arts.length}</strong> artworks</span>
+              <span><strong>0</strong> followers</span>
+              <span><strong>0</strong> following</span>
+            </p>
+          </div>
+
+          {/* ── Achievements ── */}
+          <ul className={style.achievements} aria-label="Achievements">
+            {achievements.map((ach, i) => (
+              <li key={i} className={style.achievementItem} title={`${ach.name} — ${ach.rarity}`}>
+                <div className={`${style.achievement} ${RARITY_CLASS[ach.rarity] || ""}`}>
+                  <img src={ach.image} alt={ach.name} width={40} height={40} />
+                </div>
+                <span className={style.achievementName}>{ach.name}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* ── Cards grid ── */}
+        <section className={style.artSection} aria-label="User artworks">
+          <h2 className={style.sectionTitle}>Collection</h2>
+          <div className={style.cards}>
+            {arts
+              .filter((a) => a.image)
+              .map((art) => (
+                <Link key={`${art.id}-${art.name}`} href={`/gallery/${art.id}`}>
+                  <Card art={art} />
+                </Link>
+              ))}
+          </div>
+        </section>
+      </main>
+
+    </div>
+  );
 }
