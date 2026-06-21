@@ -1,7 +1,0 @@
-:HL["/_next/static/chunks/06m5k6aqtixqp.css","style"]
-:HL["/_next/static/media/83afe278b6a6bb3c-s.p.0q-301v4kxxnr.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-:HL["/_next/static/chunks/0x5a0eaw7-6ak.css","style"]
-:HL["/_next/static/chunks/103iq44z38a8y.css","style"]
-:HL["/settings.svg","image"]
-:HL["/apple_icon.svg","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"profile","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"l4SPXpp9d8udGoLAS-v2w"}

@@ -1,14 +1,7 @@
-const repo = "creative_attempt";
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  /* config options here */
   reactCompiler: true,
-
-  output: "export",
-  images: { unoptimized: true },
-
-  basePath: `/${repo}`,
-  assetPrefix: `/${repo}/`,
 };
 
 export default nextConfig;
