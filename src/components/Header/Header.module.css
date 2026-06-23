@@ -202,7 +202,10 @@
     height: auto;
   }
   .logo {
-    width: 104px;
+    width: clamp(120px, 16vw, 180px);
     height: auto;
+  }
+  .header {
+    height: 48px;
   }
 }

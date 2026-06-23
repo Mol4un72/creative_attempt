@@ -97,5 +97,9 @@
 
 /* ─── Responsive ────────────────────────────────────────────────── */
 @media (max-width: 480px) {
-  .button { width: 100%; justify-content: center; }
+  .button {
+    justify-content: center;
+    height: 40px;
+    width: 296px;
+  }
 }

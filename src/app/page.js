@@ -45,32 +45,20 @@ export default function Home() {
           </div>
         </div>
 
-        <div className={styles.heroSide}>
-          <img
-            src="/main_right_side.png"
-            alt="Right-side hero illustration"
-          />
+        {/* ── How it Works ── */}
+        <div className={styles.steps} id="how-it-works" aria-label="How it works">
+          <div className={styles.stepsGrid}>
+            {HOW_IT_WORKS.map(({ src, alt, step, label }) => (
+              <article key={step} className={styles.step}>
+                <div className={styles.stepImageWrap}>
+                  <img src={src} alt={alt} className={styles.stepImage} />
+                </div>
+                <span className={styles.stepLabel}>{label}</span>
+              </article>
+            ))}
+          </div>
         </div>
       </main>
-
-      {/* ── How it Works ── */}
-      <section className={styles.steps} id="how-it-works" aria-label="How it works">
-        <div className={styles.stepsHeader}>
-          <h2 className={styles.sectionTitle}>How it works</h2>
-          <p className={styles.sectionSub}>Three steps to share your creativity with the world.</p>
-        </div>
-
-        <div className={styles.stepsGrid}>
-          {HOW_IT_WORKS.map(({ src, alt, step, label }) => (
-            <article key={step} className={styles.step}>
-              <div className={styles.stepImageWrap}>
-                <img src={src} alt={alt} className={styles.stepImage} />
-              </div>
-              <span className={styles.stepLabel}>{label}</span>
-            </article>
-          ))}
-        </div>
-      </section>
 
       {/* ── Donate / Support ── */}
       <section className={styles.donate} aria-label="Support the project">
