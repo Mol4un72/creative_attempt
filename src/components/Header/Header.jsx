@@ -34,17 +34,6 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  /* ── Close menu on Escape ── */
-  useEffect(() => {
-    const handleKey = (e) => {
-      if (e.key === 'Escape') {
-        setMenuOpen(false);
-      }
-    };
-    document.addEventListener('keydown', handleKey);
-    return () => document.removeEventListener('keydown', handleKey);
-  }, []);
-
   return (
     <header className={` ${styles.header} ${hidden ? styles.hidden : ""} ${isHome ? styles.home : ""}`}>
       {/* ── Logo ── */}
