@@ -1,8 +1,7 @@
 "use client";
 
 import styles from "./CreateCard.module.css";
-import { useEffect, useRef, useState } from "react";
-import { FastAverageColor } from "fast-average-color";
+import { useRef } from "react";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 
@@ -15,38 +14,11 @@ import Input from "../Input/Input";
  */
 export default function CreateCard({ image }) {
   const imgRef  = useRef(null);
-  const [bgColor, setBgColor] = useState("var(--color-surface-2)");
-
-  /* ── Extract dominant colour from uploaded image ── */
-  useEffect(() => {
-    const fac = new FastAverageColor();
-    const img = imgRef.current;
-    if (!img) return;
-
-    const extract = () => {
-      try {
-        setBgColor(fac.getColor(img).rgb);
-      } catch {
-        /* ignore – local blob URLs are same-origin so this rarely fails */
-      }
-    };
-
-    if (img.complete) {
-      extract();
-    } else {
-      img.addEventListener("load", extract);
-    }
-
-    return () => {
-      img.removeEventListener("load", extract);
-      fac.destroy?.();
-    };
-  }, [image]);
 
   return (
     <section className={styles.card} aria-label="Artwork preview">
       {/* ── Image preview ── */}
-      <div className={styles.imageContainer} style={{ backgroundColor: bgColor }}>
+      <div className={styles.imageContainer} >
         {image ? (
           <img
             ref={imgRef}

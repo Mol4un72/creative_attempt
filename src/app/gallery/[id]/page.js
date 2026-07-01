@@ -5,17 +5,17 @@ import styles from "./page.module.css";
 
 /* Shared arts data */
 const arts = [
-  { id: 1, name: "Gigachad", price: 1000, time: 1000, image: "/img.png" },
-  { id: 2, name: "Pepe", price: 500, time: 800, image: "/img.png" },
-  { id: 3, name: "Doge", price: 750, time: 600, image: "/img.png" },
-  { id: 4, name: "Wojak", price: 200, time: 1200, image: "/img.png" },
-  { id: 5, name: "Nyan Cat", price: 300, time: 400, image: "/img.png" },
-  { id: 6, name: "Shiba", price: 900, time: 900, image: "/img.png" },
-  { id: 7, name: "Trollface", price: 150, time: 300, image: "/img.png" },
-  { id: 8, name: "Rickroll", price: 420, time: 500, image: "/img.png" },
-  { id: 9, name: "Drakeposting", price: 600, time: 700, image: "/img.png" },
+  { id: 1,  name: "Gigachad",  price: 1000, time: 1000, image: "/img.png" },
+  { id: 2,  name: "Pepe",      price: 500,  time: 800,  image: "/img.png" },
+  { id: 3,  name: "Doge",      price: 750,  time: 600,  image: "/img.png" },
+  { id: 4,  name: "Wojak",     price: 200,  time: 1200, image: "/img.png" },
+  { id: 5,  name: "Nyan Cat",  price: 300,  time: 400,  image: "/img.png" },
+  { id: 6,  name: "Shiba",     price: 900,  time: 900,  image: "/img.png" },
+  { id: 7,  name: "Trollface", price: 150,  time: 300,  image: "/img.png" },
+  { id: 8,  name: "Rickroll",  price: 420,  time: 500,  image: "/img.png" },
+  { id: 9,  name: "Drakeposting", price: 600, time: 700, image: "/img.png" },
   { id: 10, name: "Grumpy Cat", price: 850, time: 1100, image: "/img.png" },
-  { id: 11, name: "Distracted", price: 350, time: 600, image: "/img.png" },
+  { id: 11, name: "Distracted", price: 350, time: 600,  image: "/img.png" },
   { id: 12, name: "Success Kid", price: 450, time: 800, image: "/img.png" },
 ];
 
@@ -28,7 +28,7 @@ export function generateStaticParams() {
 
 /* Metadata */
 export async function generateMetadata({ params }) {
-  const { id } = params;
+  const { id } = await params;
   const art = arts.find((a) => a.id.toString() === id);
 
   return {
@@ -36,8 +36,8 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function CardPage({ params }) {
-  const { id } = params;
+export default async function CardPage({ params }) {
+  const { id } = await params;
 
   const art = arts.find((a) => a.id.toString() === id);
 

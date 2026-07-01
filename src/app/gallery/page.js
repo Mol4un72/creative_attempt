@@ -33,7 +33,7 @@ const SORT_OPTIONS = [
 /**
  * Debounce hook — delays updating a value until the user stops typing.
  */
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 function useDebounce(value, delay = 300) {
   const [debounced, setDebounced] = useState(value);
@@ -80,7 +80,6 @@ export default function GalleryPage() {
         {/* ── Page heading ── */}
         <div className={styles.pageHeader}>
           <h1 className={styles.pageTitle}>Gallery</h1>
-          <p className={styles.pageSub}>Browse and collect unique artworks</p>
         </div>
 
         {/* ── Search + Sort toolbar ── */}
@@ -119,12 +118,6 @@ export default function GalleryPage() {
             ))}
           </select>
         </div>
-
-        {/* ── Results count ── */}
-        <p className={styles.resultCount} aria-live="polite">
-          {filtered.length} {filtered.length === 1 ? "artwork" : "artworks"}
-          {query && ` for "${query}"`}
-        </p>
 
         {/* ── Card grid ── */}
         {filtered.length > 0 ? (

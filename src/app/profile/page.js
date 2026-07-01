@@ -70,8 +70,6 @@ export default function ProfilePage() {
             </div>
             <p className={style.profileStats}>
               <span><strong>{arts.length}</strong> artworks</span>
-              <span><strong>0</strong> followers</span>
-              <span><strong>0</strong> following</span>
             </p>
           </div>
 

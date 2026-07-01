@@ -1,244 +1,494 @@
-/* ─── Page Shell ────────────────────────────────────────────────── */
 .page {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--color-bg);
+  position: relative;
+  overflow-x: clip;
 }
 
-/* ─── HERO ──────────────────────────────────────────────────────── */
+/* ===========================================================
+   HERO
+=========================================================== */
+
 .hero {
   position: relative;
   display: flex;
-  justify-content: center;
   align-items: center;
-  min-height: 100svh;
-  padding: clamp(7rem, 12vw, 10rem) clamp(1.5rem, 7vw, 7rem) clamp(5rem, 8vw, 7rem);
-  gap: clamp(1rem, 10vw, 10rem);
-  overflow: hidden;
-  background-color: #03080f;
-}
-
-/* Background image layer */
-.heroBg {
-  position: absolute;
-  inset: 0;
-  background: url('/main_bg.png') center top / cover no-repeat;
-  filter: blur(10px) brightness(0.35) saturate(1.4);
-  transform: scale(1.06);
-  z-index: 0;
-}
-
-/* Gradient overlay for hierarchy — dark at bottom, tinted at top */
-.heroOverlay {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 70% 60% at 20% 40%, rgba(0,229,255,0.08) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 50% at 80% 70%, rgba(124,58,237,0.10) 0%, transparent 65%),
-    linear-gradient(to bottom, rgba(3,8,15,0.2) 0%, rgba(3,8,15,0.75) 100%);
-  z-index: 1;
-  pointer-events: none;
+  justify-content: center;
+  height: 100vh;
+  padding:
+    clamp(6rem, 10vw, 9rem)
+    clamp(1.5rem, 7vw, 8rem)
+    clamp(4rem, 8vw, 7rem);
+  overflow: clip;
+  isolation: isolate;
 }
 
 .heroContent {
   position: relative;
-  z-index: 2;
-  max-width: 780px;
+  z-index: 10;
+
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-}
-
-/* Eyebrow pill badge */
-.heroEyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-primary);
-  padding: 0.35rem 0.9rem;
-  border: 1px solid rgba(0, 229, 255, 0.28);
-  border-radius: 99px;
-  background: rgba(0, 229, 255, 0.06);
-  backdrop-filter: blur(8px);
-  width: fit-content;
-}
-
-.heroEyebrow::before {
-  content: '';
-  display: block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--color-primary);
-  box-shadow: 0 0 6px var(--color-primary);
-  animation: pulse 2.4s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.5; transform: scale(0.7); }
-}
-
-/* Main title — massive, hierarchy-dominant */
-.title {
-  font-size: clamp(3.5rem, 10vw, 8.5rem);
-  font-weight: 900;
-  line-height: 0.93;
-  letter-spacing: -0.04em;
-  color: #fff;
-  /* Subtle text shadow for depth on blurred bg */
-  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.8);
-}
-
-.description {
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  color: rgba(220, 235, 255, 0.72);
-  line-height: 1.75;
-  max-width: 480px;
-}
-
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 0.5rem;
-}
-
-/* ─── HOW IT WORKS ──────────────────────────────────────────────── */
-
-.sectionSub {
-  margin-top: 0.875rem;
-  font-size: clamp(0.9rem, 1.5vw, 1.0625rem);
-  color: var(--color-text-dim);
-  line-height: 1.6;
-}
-
-.stepsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: clamp(1.5rem, 5vw, 6rem);
-  max-width: 960px;
-}
-
-.step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
   gap: 1.25rem;
-  position: relative;
-  max-width: 220px;
+
+  max-width: 760px;
 }
 
-.stepImageWrap {
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.stepImageWrap:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-deep), var(--shadow-glow);
-}
-
-.stepImage {
-  width: min(220px, 100%);
-  height: auto;
-  display: block;
-}
-
-.stepLabel {
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  font-weight: 800;
-  color: var(--color-text);
-  letter-spacing: -0.01em;
-  position: relative;
-  z-index: 1;
-}
-
-/* ─── DONATE / SUPPORT ──────────────────────────────────────────── */
-.donate {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 1.25rem;
-  width: 35rem;
-  padding: clamp(3.5rem, 7vw, 6rem) clamp(1.5rem, 6vw, 4rem);
+.heroTitle {
   margin: 0 auto;
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  /* Tinted glass surface — stands out from bg */
-  background: linear-gradient(135deg,
-    rgba(0, 229, 255, 0.06) 0%,
-    rgba(17, 29, 46, 0.95) 50%,
-    rgba(124, 58, 237, 0.07) 100%
-  );
-  border: 1px solid rgba(0, 229, 255, 0.14);
-  box-shadow:
-    var(--shadow-deep),
-    0 0 80px rgba(0, 229, 255, 0.06) inset;
+  font-size: clamp(3.5rem, 10vw, 8.5rem);
+  line-height: .9;
+  font-weight: 900;
+  color: white;
+  text-shadow:
+      0 0 20px rgba(0,0,0,.25),
+      0 8px 50px rgba(0,0,0,.45);
+  user-select: none;
 }
 
-/* Ambient radial glow centred on donate card */
-.donateGlow {
+.heroTitle_1{
+  opacity:0;
+  animation:titleFade 1.1s ease forwards;
+}
+
+.heroTitle_2{
+  opacity:0;
+  transform:scale(.75);
+  animation:
+  titlePunch .80s cubic-bezier(.18,1.25,.3,1) .45s forwards;
+}
+
+.heroActions{
+  display:flex;
+  flex-direction: row;
+  margin: 0 auto;
+  gap:1rem;
+  flex-wrap:wrap;
+  margin-top:1rem;
+  opacity:0;
+  animation: actionsFade 2s ease 1.25s forwards;
+}
+
+/* ===========================================================
+   HERO CARDS
+=========================================================== */
+
+.heroCardBlock{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  overflow:hidden;
+  animation: cardsBlur 2s ease 1.15s forwards;
+}
+
+.heroCard{
+  position:absolute;
+  width:clamp(120px,12vw,224px);
+  height:auto;
+  border-radius:12px;
+  filter:drop-shadow(0 20px 40px rgba(0,0,0,.25));
+  transform:
+      translateY(-140vh)
+      rotate(var(--r));
+  animation:cardFall .55s cubic-bezier(.18,.82,.32,1) forwards;
+}
+
+/* ===========================================================
+   CARD POSITIONS
+=========================================================== */
+
+.card1{
+    --r:-18deg;
+    top:8%;
+    left:12%;
+    animation-delay:0.85s;
+}
+
+.card2{
+    --r:14deg;
+    top:58%;
+    left:8%;
+    animation-delay:0.83s;
+}
+
+.card3{
+    --r:12deg;
+    top:10%;
+    right:8%;
+    animation-delay:0.8s;
+}
+
+.card4{
+    --r:-16deg;
+    top:58%;
+    right:5%;
+    animation-delay:0.81s;
+}
+
+.card5{
+    --r:82deg;
+    top:0;
+    left:44%;
+    animation-delay:0.8s;
+}
+
+.card6{
+    --r:8deg;
+    top:58%;
+    left:46%;
+    animation-delay:0.82s;
+}
+
+/* ===========================================================
+   ANIMATIONS
+=========================================================== */
+
+@keyframes titleFade{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+@keyframes titlePunch{
+    0%{
+        opacity:0;
+        transform:scale(.7);
+    }
+    65%{
+        opacity:1;
+        transform:scale(1.18);
+    }
+    82%{
+        transform:scale(.95);
+    }
+    100%{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+@keyframes actionsFade{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
+}
+
+@keyframes cardFall{
+    from{
+        transform:
+            translateY(-140vh)
+            rotate(var(--r));
+    }
+    to{
+        transform:
+            translateY(0)
+            rotate(var(--r));
+    }
+}
+
+@keyframes cardsBlur{
+    from{
+        filter:blur(0);
+    }
+    to{
+        filter:blur(10px);
+    }
+}
+
+/* ===========================================================
+   LEARN MORE
+=========================================================== */
+
+.learnMore {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 100vw;
+  height: max-content;
+  overflow: hidden;
+  margin: clamp(4rem, 14vw, 12rem) 0;
+  padding: clamp(3rem, 10vw, 8rem) 0;
+  background:linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.09);
+  border-left: none;
+  border-right: none;
+  box-shadow:
+      0 18px 45px rgba(2, 6, 23, 0.45),
+      inset 0 1px 0 rgba(255,255,255,0.08);
+  backdrop-filter: blur(14px);
+  scroll-margin-top: 200px;
+}
+
+.learnMore::before {
+  content: "";
   position: absolute;
-  top: -80px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 600px;
-  height: 300px;
-  background: radial-gradient(ellipse,
-    rgba(0, 229, 255, 0.15) 0%,
-    rgba(124, 58, 237, 0.08) 40%,
-    transparent 70%
-  );
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.7s ease;
   pointer-events: none;
 }
 
-.donateTitle {
-  font-size: clamp(1.75rem, 4vw, 2.75rem);
-  font-weight: 900;
+.learnMore:hover::before {
+  transform: translateX(100%);
+}
+
+.learnMore h2 {
+  margin: 0 0 0.7rem;
+  font-size: clamp(1.5rem, 6vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
   color: var(--color-text);
-  letter-spacing: -0.03em;
-  position: relative;
-  z-index: 1;
 }
 
-.donateSub {
-  font-size: clamp(0.9rem, 1.5vw, 1.0625rem);
-  color: var(--color-text-dim);
-  max-width: 460px;
-  line-height: 1.7;
-  position: relative;
-  z-index: 1;
+.learnMore p {
+  color: var(--color-muted);
+  margin: 0 clamp(1rem, 5vw, 10rem);
+  font-size: clamp(1.25rem, 3vw, 2rem);
 }
 
-/* ─── Responsive ────────────────────────────────────────────────── */
+.learnMore a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--color-primary);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.learnMore a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--color-primary), rgba(255,255,255,0.8));
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.3s ease;
+}
+
+.learnMore a:hover::after,
+.learnMore a:focus::after {
+  transform: scaleX(1);
+}
+
+/* ===========================================================
+   HOW IT WORKS
+=========================================================== */
+
+.steps {
+  display: flex;
+  justify-content: center;
+  margin: clamp(6rem, 4vw, 10rem) 0;
+  scroll-margin-top: 200px;
+}
+
+.stepsGrid{
+  display:grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: clamp(1rem, 4vw, 6rem);
+}
+
+/* ===========================================================
+   STEP
+=========================================================== */
+
+.step{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  padding:1rem;
+}
+
+.stepImageWrap{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.stepImage {
+  display: block;
+  width: clamp(6rem, 12vw, 26rem);
+  height: auto;
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+}
+
+.stepImage:hover {
+  transform: translateY(-10px);
+}
+
+/* ===========================================================
+   STEP LABEL
+=========================================================== */
+
+.stepLabel{
+  position:relative;
+  font-size:clamp(1rem,2vw,1.75rem);
+  font-weight:800;
+  color: var(--color-text);
+  transition: color .35s ease;
+  letter-spacing:-.02em;
+  margin-top:clamp(.5rem,1vw,1.5rem);
+}
+
+.stepLabel::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-8px;
+  transform:translateX(-50%);
+  width:40px;
+  height:3px;
+  border-radius:100px;
+  background:currentColor;
+  opacity:.18;
+}
+
+.step:hover .stepLabel {
+  color: var(--color-primary);
+}
+
+@media (max-width: 1240px) {
+  .card1{
+    --r:-18deg;
+    top:8%;
+    left:12%;
+    animation-delay:0.85s;
+  }
+
+  .card2{
+    --r:14deg;
+    top:15%;
+    left:58%;
+    animation-delay:0.83s;
+  }
+
+  .card3{
+    --r:10deg;
+    top:38%;
+    left:8%;
+    animation-delay:0.8s;
+  }
+
+  .card4{
+    --r:-16deg;
+    top:48%;
+    right:7%;
+    animation-delay:0.81s;
+  }
+
+  .card5{
+    --r:82deg;
+    top:64%;
+    left:14%;
+    animation-delay:0.8s;
+  }
+
+  .card6{
+    --r:24deg;
+    top:75%;
+    left:55%;
+    animation-delay:0.82s;
+  }
+}
+
+@media (max-width: 1024px) {
+  .card1{
+    --r:-18deg;
+    top:8%;
+    left:12%;
+    animation-delay:0.85s;
+  }
+
+  .card2{
+    --r:14deg;
+    top:15%;
+    left:58%;
+    animation-delay:0.83s;
+  }
+
+  .card3{
+    --r:10deg;
+    top:38%;
+    left:8%;
+    animation-delay:0.8s;
+  }
+
+  .card4{
+    --r:-16deg;
+    top:48%;
+    right:7%;
+    animation-delay:0.81s;
+  }
+
+  .card5{
+    --r:82deg;
+    top:64%;
+    left:14%;
+    animation-delay:0.8s;
+  }
+
+  .card6{
+    --r:24deg;
+    top:75%;
+    left:55%;
+    animation-delay:0.82s;
+  }
+}
+
 @media (max-width: 768px) {
-  .stepsGrid { grid-template-columns: 1fr; max-width: 300px; }
-  .donate    { 
-    max-width: 368px;
-   }
-  .stepImage {
-    width: 160px;
+  .card1{
+    --r:-18deg;
+    top:8%;
+    left:12%;
+    animation-delay:0.85s;
   }
-  .heroContent{
-    display: flex;
-    align-items: center;
-    text-align: center;
-    .actions {
-      display: flex;
-      justify-content: center;
-    }
+
+  .card2{
+    --r:14deg;
+    top:15%;
+    left:58%;
+    animation-delay:0.83s;
   }
-  .heroBg {
-    background: url('/main_bg_phone.png') center top / cover no-repeat;
+
+  .card3{
+    --r:10deg;
+    top:38%;
+    left:8%;
+    animation-delay:0.8s;
   }
-  .steps {
-    display: none;
+
+  .card4{
+    --r:-16deg;
+    top:48%;
+    right:7%;
+    animation-delay:0.81s;
+  }
+
+  .card5{
+    --r:82deg;
+    top:64%;
+    left:14%;
+    animation-delay:0.8s;
+  }
+
+  .card6{
+    --r:24deg;
+    top:75%;
+    left:55%;
+    animation-delay:0.82s;
   }
 }
