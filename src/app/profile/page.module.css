@@ -41,7 +41,6 @@
 .nicknameRow {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
 }
 
 .nickname {
@@ -130,14 +129,16 @@
 
 /* ─── Art Section ───────────────────────────────────────────────── */
 .artSection {
-  padding: clamp(2rem, 4vw, 3rem) clamp(1.25rem, 5vw, 4rem) 4rem;
+  padding: 0 clamp(1.25rem, 5vw, 4rem) 4rem;
 }
 
 .sectionTitle {
+  display: flex;
+  justify-content: center;
   font-size: clamp(1.25rem, 2.5vw, 1.625rem);
   font-weight: 700;
   letter-spacing: -0.02em;
-  margin-bottom: 1.5rem;
+  margin: 1.5rem;
 }
 
 .cards {
@@ -148,13 +149,40 @@
 
 /* ─── Responsive ────────────────────────────────────────────────── */
 @media (max-width: 640px) {
-  .profileBanner { flex-direction: column; }
-  .achievements  { margin-left: 0; }
-  .cards         { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  .profileBanner {
+    flex-direction: column;
+  }
+  
+  .profileInfo, .avatarWrap, .profileStats {
+    margin: 0 auto;
+  }
+
+  .avatar {
+    width: 128px;
+    height: 128px;
+  }
+  
+  .achievements  {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-left: 0;
+    gap: 1rem;
+    justify-items: center;
+  }
+
+  .achievementItem:nth-child(n + 5) {
+    display: none;
+  }
+
+  .cards {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
   .nicknameRow {
     gap: 0;
     .settingsBtn {
       transform: translateY(1px)
     }
   }
+
 }

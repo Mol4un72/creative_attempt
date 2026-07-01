@@ -39,7 +39,7 @@
 
 /* ─── Variants ──────────────────────────────────────────────────── */
 .default {
-  width: 220px;
+  width: 100%;
   cursor: pointer;
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
@@ -76,7 +76,6 @@
 .image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -101,6 +100,7 @@
 }
 
 .name {
+  margin: 0 auto;
   font-size: 0.9375rem;
   font-weight: 700;
   color: var(--color-text);
@@ -130,6 +130,7 @@
 
 /* Price: vivid gradient text for maximum pop */
 .price {
+  margin: 0 auto;
   font-weight: 800;
   font-size: 1.05rem;
   color: var(--color-text);
@@ -138,7 +139,7 @@
 }
 
 .time {
-  display: inline-flex;
+  display: none;
   align-items: center;
   gap: 4px;
   color: var(--color-text);
@@ -160,10 +161,16 @@
 }
 
 .full .price {
+  margin-left: 4%;
   font-size: 1.5rem;
 }
 
 .full .time {
+  margin-right: 4%;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-text);
   font-size: 1.5rem;
 }
 
@@ -229,7 +236,7 @@
 
 /* ─── Responsive ────────────────────────────────────────────────── */
 @media (max-width: 480px) {
-  .default { width: 160px; }
+  .default { width: 100%; }
   .default .imageContainer { height: 160px; }
   .full    { width: 100%; }
   .full .imageContainer { height: 300px; }

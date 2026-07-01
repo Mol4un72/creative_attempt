@@ -1,6 +1,7 @@
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import Button from "../components/Button/Button";
+import Image from 'next/image';
 import styles from "./page.module.css";
 import Link from "next/link";
 
@@ -10,7 +11,6 @@ export const metadata = {
     "A place to display your creativity. Post, collect and sell your artwork on Creative Attempt.",
 };
 
-/** Three‑step "how it works" section data */
 const HOW_IT_WORKS = [
   { src: "/phone_1.png", alt: "Upload your artwork", step: "01", label: "Upload" },
   { src: "/phone_2.png", alt: "Name and price it",   step: "02", label: "Name"   },
@@ -20,33 +20,51 @@ const HOW_IT_WORKS = [
 export default function Home() {
   return (
     <div className={styles.page}>
-      <Header />
-
-      {/* ── Hero ── */}
-      <main className={styles.hero} id="top">
-        {/* blurred background image — CSS pseudo-element */}
-        <div className={styles.heroBg} aria-hidden="true" />
+      
+       <main className={styles.hero}>
 
         <div className={styles.heroContent}>
-          <span className={styles.heroEyebrow}>Meme collecting platform</span>
-          <h1 className={styles.title}>Creative<br />Attempt</h1>
-          <p className={styles.description}>
-            A place to display your creativity. Post your work for
-            other users to buy and collect.
-          </p>
 
-          <div className={styles.actions}>
+          <h1 className={`${styles.heroTitle} ${styles.heroTitle_1}`}>Creative</h1>
+          <h1 className={`${styles.heroTitle} ${styles.heroTitle_2}`}>Attempt</h1>
+
+          <div className={styles.heroActions}>
             <Link href="/gallery">
               <Button size="lg">Browse Gallery</Button>
             </Link>
-            <Link href="#how-it-works">
+            <Link href="#learn-more">
               <Button size="lg" variant="secondary">Learn More</Button>
             </Link>
           </div>
+
         </div>
 
-        {/* ── How it Works ── */}
-        <div className={styles.steps} id="how-it-works" aria-label="How it works">
+        <div className={styles.heroCardBlock}>
+          <Image src="/card1.png" width={224} height={344} alt="card"  className={`${styles.heroCard} ${styles.card1}`} />
+          <Image src="/card2.png" width={224} height={344} alt="card"  className={`${styles.heroCard} ${styles.card2}`} />
+          <Image src="/card3.png" width={224} height={344} alt="card"  className={`${styles.heroCard} ${styles.card3}`} />
+          <Image src="/card4.png" width={224} height={344} alt="card"  className={`${styles.heroCard} ${styles.card4}`} />
+          <Image src="/card5.png" width={224} height={344} alt="card"  className={`${styles.heroCard} ${styles.card5}`} />
+          <Image src="/card6.png" width={224} height={344} alt="card"  className={`${styles.heroCard} ${styles.card6}`} />
+        </div>
+        
+      </main>
+
+      <section className={styles.learnMore} id="learn-more">
+
+        <div>
+          <h2>Creative Attempt is...</h2>
+          <p>
+            Platform, where you can upload your image, set price and sell like this!<br />
+            Also you can buy other users images. <Link href="#how-it-works">How it works?</Link>
+          </p>
+        </div>
+        
+      </section>
+
+      <section>
+
+        <div id="how-it-works" className={styles.steps} aria-label="How it works">
           <div className={styles.stepsGrid}>
             {HOW_IT_WORKS.map(({ src, alt, step, label }) => (
               <article key={step} className={styles.step}>
@@ -58,16 +76,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </main>
 
-      {/* ── Donate / Support ── */}
-      <section className={styles.donate} aria-label="Support the project">
-        <div className={styles.donateGlow} aria-hidden="true" />
-        <h2 className={styles.donateTitle}>Like this project?</h2>
-        <p className={styles.donateSub}>
-          You can support with a donation and help improve the site.
-        </p>
-        <Button size="lg">Donate ☕</Button>
       </section>
 
       <Footer />

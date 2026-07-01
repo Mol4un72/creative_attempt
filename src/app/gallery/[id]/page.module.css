@@ -15,6 +15,7 @@
 }
 
 .backLink {
+  margin: 0 auto;
   align-self: flex-start;
   font-size: 0.9rem;
   font-weight: 500;

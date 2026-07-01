@@ -10,8 +10,12 @@
   gap: 2rem;
   padding: 0 clamp(1rem, 4vw, 3rem);
   height: 72px;
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(var(--header-blur, 16px));
   transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.home {
+  --header-blur: 0px;
 }
 
 .hidden {
@@ -27,7 +31,7 @@
 }
 
 .logo img {
-  width: clamp(120px, 16vw, 180px);
+  width: clamp(110px, 12vw, 160px);
   height: auto;
 }
 

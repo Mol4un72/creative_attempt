@@ -1,8 +1,7 @@
 "use client";
 
 import styles from "./Card.module.css";
-import { useEffect, useRef, useState } from "react";
-import { FastAverageColor } from "fast-average-color";
+import { useRef } from "react";
 import Button from "../Button/Button";
 
 /**
@@ -17,43 +16,14 @@ import Button from "../Button/Button";
 export default function Card({ art, variant = "default" }) {
   const { name, price, time, image } = art;
   const imgRef   = useRef(null);
-  const [bgColor, setBgColor] = useState("transparent");
 
   const hasMeta = price != null && time != null;
   const isFull  = variant === "full";
 
-  /* ── Extract dominant colour from artwork image ── */
-  useEffect(() => {
-    const fac = new FastAverageColor();
-    const img = imgRef.current;
-    if (!img) return;
-
-    const extract = () => {
-      try {
-        const color = fac.getColor(img);
-        // Darken the extracted colour slightly for a nicer bg
-        setBgColor(color.rgb);
-      } catch {
-        /* silently ignore cross-origin images */
-      }
-    };
-
-    if (img.complete) {
-      extract();
-    } else {
-      img.addEventListener("load", extract);
-    }
-
-    return () => {
-      img.removeEventListener("load", extract);
-      fac.destroy?.();
-    };
-  }, [image]);
-
   return (
     <article className={`${styles.card} ${styles[variant]}`}>
       {/* ── Image area ── */}
-      <div className={styles.imageContainer} style={{ backgroundColor: bgColor }}>
+      <div className={styles.imageContainer} >
         <img
           ref={imgRef}
           src={image}

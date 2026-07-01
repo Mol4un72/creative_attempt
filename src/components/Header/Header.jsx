@@ -18,6 +18,7 @@ export default function Header() {
   const [hidden,   setHidden]   = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+  const isHome = pathname === "/";
   
   /* ── Hide header on scroll down, show on scroll up ── */
   useEffect(() => {
@@ -45,11 +46,11 @@ export default function Header() {
   }, []);
 
   return (
-    <header className={`${styles.header} ${hidden ? styles.hidden : ''}`}>
+    <header className={` ${styles.header} ${hidden ? styles.hidden : ""} ${isHome ? styles.home : ""}`}>
       {/* ── Logo ── */}
       <div className={styles.logo}>
         <Link href="/">
-          <Image src="/logo.png" alt="Creative Attempt" width={180} height={64} priority style={{ width: '100%', height: 'auto' }} />
+          <Image src="/logo.png" alt="Creative Attempt" width={180} height={64} priority />
         </Link>
       </div>
 
@@ -68,7 +69,7 @@ export default function Header() {
       <div className={styles.actions}>
         {/* Profile */}
         <Link href="/profile" className={styles.iconBtn} aria-label="Profile">
-          <Image src="/profile.svg" alt="" width={22} height={22} style={{ width: '32px', height: '32px' }} />
+          <Image src="/profile.svg" alt="" width={56} height={56} />
         </Link>
 
         {/* Hamburger (mobile) */}
