@@ -23,8 +23,8 @@
 }
 
 .avatar {
-  width: clamp(80px, 12vw, 140px);
-  height: clamp(80px, 12vw, 140px);
+  width: clamp(128px, 10vw, 140px);
+  height: clamp(128px, 10vw, 140px);
   border-radius: 50%;
   background: var(--color-surface-2);
   border: 3px solid var(--color-border);
@@ -58,7 +58,7 @@
   border-radius: var(--radius-sm);
   color: var(--color-muted);
   transition: background-color var(--transition), color var(--transition);
-  transform: translateY(4px);
+  transform: translateY(clamp(0.125rem, 0.5vw, 0.25rem));
 }
 
 .settingsBtn:hover {
@@ -81,8 +81,9 @@
 /* Achievements */
 .achievements {
   display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
+  flex-direction: row;
+  gap: clamp(1rem, 4vw, 2rem);
+  flex-wrap: nowrap;
   list-style: none;
   margin-left: auto;
   align-items: center;
@@ -96,8 +97,8 @@
 }
 
 .achievement {
-  width: 72px;
-  height: 72px;
+  width: clamp(56px, 6vw, 72px);
+  height: clamp(56px, 6vw, 72px);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -148,26 +149,44 @@
 }
 
 /* ─── Responsive ────────────────────────────────────────────────── */
+
+@media (max-width:768px) {
+  .profileBanner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .profileInfo {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .avatarWrap {
+    flex-shrink: 0;
+  }
+
+  .achievements {
+    flex: 0 1 auto;
+    flex-wrap: nowrap;
+    margin-left: 0;
+    gap: 0.75rem;
+    justify-content: flex-end;
+  }
+
+  .achievementItem:nth-child(n + 5) {
+    display: none;
+  }
+}
+
 @media (max-width: 640px) {
   .profileBanner {
     flex-direction: column;
   }
-  
-  .profileInfo, .avatarWrap, .profileStats {
-    margin: 0 auto;
-  }
 
-  .avatar {
-    width: 128px;
-    height: 128px;
-  }
-  
-  .achievements  {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    margin-left: 0;
-    gap: 1rem;
-    justify-items: center;
+  .profileInfo, .avatarWrap, .profileStats, .achievements  {
+    margin: 0 auto;
   }
 
   .achievementItem:nth-child(n + 5) {
@@ -176,13 +195,6 @@
 
   .cards {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  }
-
-  .nicknameRow {
-    gap: 0;
-    .settingsBtn {
-      transform: translateY(1px)
-    }
   }
 
 }

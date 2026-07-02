@@ -33,11 +33,11 @@ const arts = [
 ];
 
 const achievements = [
-  { name: "First Upload",   rarity: "common",    image: "/apple_icon.svg" },
-  { name: "Top Seller",     rarity: "rare",      image: "/apple_icon.svg" },
-  { name: "First Bid",      rarity: "uncommon",  image: "/apple_icon.svg" },
-  { name: "Pioneer",        rarity: "legendary", image: "/apple_icon.svg" },
-  { name: "100 Likes",      rarity: "rare",      image: "/apple_icon.svg" },
+  { name: "First Upload",   rarity: "common",   },
+  { name: "Top Seller",     rarity: "rare",     },
+  { name: "First Bid",      rarity: "uncommon", },
+  { name: "Pioneer",        rarity: "legendary",},
+  { name: "100 Likes",      rarity: "rare",     },
 ];
 
 /** Map rarity to a colour accent class */
@@ -78,7 +78,7 @@ export default function ProfilePage() {
             {achievements.map((ach, i) => (
               <li key={i} className={style.achievementItem} title={`${ach.name} — ${ach.rarity}`}>
                 <div className={`${style.achievement} ${RARITY_CLASS[ach.rarity] || ""}`}>
-                  <img src={ach.image} alt={ach.name} width={40} height={40} />
+                  <img src={ach.image} />
                 </div>
                 <span className={style.achievementName}>{ach.name}</span>
               </li>
