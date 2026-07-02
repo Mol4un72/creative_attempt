@@ -13,6 +13,10 @@
   --color-text: #ffffff;
   --color-muted: rgba(255, 255, 255, 0.55);
   --color-accent: rgba(0, 229, 255, 0.12);
+  --gradient-card: linear-gradient(180deg, rgba(15, 25, 35, 0.96), rgba(26, 39, 53, 0.92));
+  --gradient-brand: linear-gradient(135deg, #00e5ff 0%, #7c3aed 60%, #f97316 100%);
+  --gradient-brand-sm: linear-gradient(135deg, rgba(0, 229, 255, 0.16), rgba(124, 58, 237, 0.14));
+  --color-primary-glow: rgba(0, 229, 255, 0.18);
 
   /* Typography */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;

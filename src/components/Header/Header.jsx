@@ -6,21 +6,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Header.module.css';
 
-/** Nav links rendered in header */
 const NAV_LINKS = [
-  { href: '/gallery',    label: 'Gallery' },
-  { href: '/create',     label: 'Create' },
+  { href: '/gallery', label: 'Gallery' },
+  { href: '/create', label: 'Create' },
   { href: '/contact-us', label: 'Contact' },
-  { href: '/about-us',   label: 'About' },
+  { href: '/about-us', label: 'About' },
 ];
 
 export default function Header() {
-  const [hidden,   setHidden]   = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
-  const isHome = pathname === "/";
-  
-  /* ── Hide header on scroll down, show on scroll up ── */
+  const isHome = pathname === '/';
+
   useEffect(() => {
     let lastScrollY = window.scrollY;
 
@@ -34,38 +32,40 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
   return (
-    <header className={` ${styles.header} ${hidden ? styles.hidden : ""} ${isHome ? styles.home : ""}`}>
-      {/* ── Logo ── */}
+    <header className={`${styles.header} ${hidden ? styles.hidden : ''} ${isHome ? styles.home : ''}`}>
       <div className={styles.logo}>
         <Link href="/">
           <Image src="/logo.png" alt="Creative Attempt" width={180} height={64} priority />
         </Link>
       </div>
 
-      {/* ── Desktop Nav ── */}
       <nav className={styles.nav} aria-label="Main navigation">
         {NAV_LINKS.map(({ href, label }) => (
-          <Link key={href} href={href} className={`${styles.navLink} ${
-            pathname === href ? styles.active : ''
-          }`}>
+          <Link
+            key={href}
+            href={href}
+            className={`${styles.navLink} ${pathname === href ? styles.active : ''}`}
+            onClick={() => setMenuOpen(false)}
+          >
             {label}
           </Link>
         ))}
       </nav>
 
-      {/* ── Actions ── */}
       <div className={styles.actions}>
-        {/* Profile */}
-        <Link href="/profile" className={styles.iconBtn} aria-label="Profile">
+        <Link href="/profile" className={styles.iconBtn} aria-label="Profile" onClick={() => setMenuOpen(false)}>
           <Image src="/profile.svg" alt="" width={56} height={56} />
         </Link>
 
-        {/* Hamburger (mobile) */}
         <button
           id="header-menu-btn"
           className={`${styles.hamburger} ${menuOpen ? styles.hamburgerOpen : ''}`}
-          onClick={() => setMenuOpen((v) => !v)}
+          onClick={() => setMenuOpen((value) => !value)}
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={menuOpen}
         >
@@ -75,16 +75,10 @@ export default function Header() {
         </button>
       </div>
 
-      {/* ── Mobile Drawer ── */}
       {menuOpen && (
         <nav className={styles.mobileMenu} aria-label="Mobile navigation">
           {NAV_LINKS.map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
-              className={styles.mobileLink}
-              onClick={() => setMenuOpen(false)}
-            >
+            <Link key={href} href={href} className={styles.mobileLink} onClick={() => setMenuOpen(false)}>
               {label}
             </Link>
           ))}
