@@ -14,10 +14,10 @@ import Button from "../Button/Button";
  *    • "full"    → expanded detail view with bet UI
  */
 export default function Card({ art, variant = "default" }) {
-  const { name, price, time, image } = art;
+  const { name, price, image } = art;
   const imgRef   = useRef(null);
 
-  const hasMeta = price != null && time != null;
+  const hasMeta = price != null;
   const isFull  = variant === "full";
 
   return (
@@ -44,10 +44,6 @@ export default function Card({ art, variant = "default" }) {
             <hr className={styles.hr} />
             <div className={styles.details}>
               <span className={styles.price}>{price}$</span>
-              <span className={styles.time}>
-                {time}
-                <img src="/clock.svg" alt="time left" className={styles.clockIcon} />
-              </span>
             </div>
           </>
         )}
@@ -56,15 +52,8 @@ export default function Card({ art, variant = "default" }) {
       {/* ── Bet block (full variant only) ── */}
       {isFull && (
         <div className={styles.betBlock}>
-          <input
-            className={styles.betInput}
-            type="number"
-            placeholder="Your bid ($)"
-            min={price}
-            aria-label="Enter your bid"
-          />
           <Button className={styles.betBtn} type="button" size="md">
-            Place Bid
+            Buy
           </Button>
         </div>
       )}
