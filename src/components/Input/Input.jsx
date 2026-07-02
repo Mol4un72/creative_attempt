@@ -14,14 +14,15 @@ export default function Input({
 }) {
   return (
     <div className={styles.wrapper}>
-      {label && (
+      {label ? (
         <label htmlFor={id} className={styles.label}>
           {label}
         </label>
-      )}
+      ) : null}
+
       <input
         id={id}
-        className={`${styles.input} ${className}`}
+        className={[styles.input, className].filter(Boolean).join(" ")}
         type={type}
         placeholder={placeholder}
         {...props}

@@ -14,14 +14,15 @@ export default function Textarea({
 }) {
   return (
     <div className={styles.wrapper}>
-      {label && (
+      {label ? (
         <label htmlFor={id} className={styles.label}>
           {label}
         </label>
-      )}
+      ) : null}
+
       <textarea
         id={id}
-        className={`${styles.textarea} ${className}`}
+        className={[styles.textarea, className].filter(Boolean).join(" ")}
         placeholder={placeholder}
         rows={rows}
         {...props}

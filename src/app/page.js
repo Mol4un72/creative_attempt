@@ -1,30 +1,26 @@
-import Header from "../components/Header/Header";
-import Footer from "../components/Footer/Footer";
-import Button from "../components/Button/Button";
+import Footer from '../components/Footer/Footer';
+import Button from '../components/Button/Button';
 import Image from 'next/image';
-import styles from "./page.module.css";
-import Link from "next/link";
+import styles from './page.module.css';
+import Link from 'next/link';
 
 export const metadata = {
-  title: "Creative Attempt — Meme Collecting Platform",
-  description:
-    "A place to display your creativity. Post, collect and sell your artwork on Creative Attempt.",
+  title: 'Creative Attempt — Meme Collecting Platform',
+  description: 'A place to display your creativity. Post, collect and sell your artwork on Creative Attempt.',
 };
 
 const HOW_IT_WORKS = [
-  { src: "/phone_1.png", alt: "Upload your artwork", step: "01", label: "Upload" },
-  { src: "/phone_2.png", alt: "Name and price it",   step: "02", label: "Name"   },
-  { src: "/phone_3.png", alt: "Sell your creation",  step: "03", label: "Sell!"  },
+  { src: '/phone_1.png', alt: 'Upload your artwork', step: '01', label: 'Upload' },
+  { src: '/phone_2.png', alt: 'Name and price it', step: '02', label: 'Name' },
+  { src: '/phone_3.png', alt: 'Sell your creation', step: '03', label: 'Sell!' },
 ];
 
 export default function Home() {
   return (
     <div className={styles.page}>
-      
-       <main className={styles.hero}>
 
+      <main className={styles.hero}>
         <div className={styles.heroContent}>
-
           <h1 className={`${styles.heroTitle} ${styles.heroTitle_1}`}>Creative</h1>
           <h1 className={`${styles.heroTitle} ${styles.heroTitle_2}`}>Attempt</h1>
 
@@ -36,34 +32,30 @@ export default function Home() {
               <Button size="lg" variant="secondary">Learn More</Button>
             </Link>
           </div>
-
         </div>
 
         <div className={styles.heroCardBlock}>
-          <Image src="/card1.png" width={224} height={344} alt="card"  className={`${styles.heroCard} ${styles.card1}`} />
-          <Image src="/card2.png" width={224} height={344} alt="card"  className={`${styles.heroCard} ${styles.card2}`} />
-          <Image src="/card3.png" width={224} height={344} alt="card"  className={`${styles.heroCard} ${styles.card3}`} />
-          <Image src="/card4.png" width={224} height={344} alt="card"  className={`${styles.heroCard} ${styles.card4}`} />
-          <Image src="/card5.png" width={224} height={344} alt="card"  className={`${styles.heroCard} ${styles.card5}`} />
-          <Image src="/card6.png" width={224} height={344} alt="card"  className={`${styles.heroCard} ${styles.card6}`} />
+          <Image src="/card1.png" width={224} height={344} alt="card" className={`${styles.heroCard} ${styles.card1}`} />
+          <Image src="/card2.png" width={224} height={344} alt="card" className={`${styles.heroCard} ${styles.card2}`} />
+          <Image src="/card3.png" width={224} height={344} alt="card" className={`${styles.heroCard} ${styles.card3}`} />
+          <Image src="/card4.png" width={224} height={344} alt="card" className={`${styles.heroCard} ${styles.card4}`} />
+          <Image src="/card5.png" width={224} height={344} alt="card" className={`${styles.heroCard} ${styles.card5}`} />
+          <Image src="/card6.png" width={224} height={344} alt="card" className={`${styles.heroCard} ${styles.card6}`} />
         </div>
-        
       </main>
 
       <section className={styles.learnMore} id="learn-more">
-
         <div>
           <h2>Creative Attempt is...</h2>
           <p>
-            Platform, where you can upload your image, set price and sell like this!<br />
+            Platform, where you can upload your image, set price and sell like this!
+            <br />
             Also you can buy other users images. <Link href="#how-it-works">How it works?</Link>
           </p>
         </div>
-        
       </section>
 
       <section>
-
         <div id="how-it-works" className={styles.steps} aria-label="How it works">
           <div className={styles.stepsGrid}>
             {HOW_IT_WORKS.map(({ src, alt, step, label }) => (
@@ -76,7 +68,6 @@ export default function Home() {
             ))}
           </div>
         </div>
-
       </section>
 
       <Footer />

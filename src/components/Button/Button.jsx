@@ -13,14 +13,12 @@ export default function Button({
   size = "md",
   ...props
 }) {
+  const classes = [styles.button, styles[variant], styles[size], className]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <button
-      type={type}
-      className={[styles.button, styles[variant], styles[size], className]
-        .filter(Boolean)
-        .join(" ")}
-      {...props}
-    >
+    <button type={type} className={classes} {...props}>
       {children}
     </button>
   );
